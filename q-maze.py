@@ -54,7 +54,12 @@ def draw_maze():
         for j in range(maze_size):
             x0, y0 = j * cell_width, i * cell_height
             x1, y1 = (j + 1) * cell_width, (i + 1) * cell_height
-            canvas.create_rectangle(x0, y0, x1, y1, fill='white', outline='lightgray')
+            if maze[i, j] == 1:  # Obstacle
+                canvas.create_rectangle(x0, y0, x1, y1, fill='brown', outline='brown')
+            elif maze[i, j] == 2:  # Sortie
+                canvas.create_rectangle(x0, y0, x1, y1, fill='green', outline='green')
+            else:  # Case vide
+                canvas.create_rectangle(x0, y0, x1, y1, fill='white', outline='lightgray')
     
     # Dessiner l'agent
     x, y = agent_pos
