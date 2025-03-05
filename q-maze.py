@@ -116,7 +116,9 @@ def update_game():
 
     draw_maze()
 
-    root.after(100, update_game)  # Met à jour toutes les 100ms
+    # Continuer tant que le jeu n'est pas fini
+    if reward != 1:
+        root.after(100, update_game)  # Met à jour toutes les 100ms
 
 # Initialisation de l'interface
 root = tk.Tk()
