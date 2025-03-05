@@ -1,5 +1,6 @@
 import tkinter as tk
 import numpy as np
+import random
 
 # Paramètres du Q-Learning
 alpha = 0.1  # Taux d'apprentissage
@@ -21,6 +22,27 @@ Q_table = np.zeros((maze_size, maze_size, num_actions))
 # Labyrinthe initialisé
 maze = np.zeros((maze_size, maze_size))  # 0 = libre
 agent_pos = (0, 0)  # Position de l'agent
+
+# Fonction pour générer un labyrinthe parfait
+def generate_perfect_maze():
+    global maze
+    maze = np.ones((maze_size, maze_size))  # Toutes les cases sont des murs
+
+    def carve(x, y):
+        maze[x, y] = 0  # On commence par creuser à la position (x, y)
+        directions = [(1, 0), (-1, 0), (0, 1), (0, -1)]
+        random.shuffle(directions)
+
+        for dx, dy in directions:
+            nx, ny = x + dx * 2, y + dy * 2
+            if 0 <= nx < maze_size and 0 <= ny < maze_size and maze[nx, ny] == 1:
+                maze[x + dx, y + dy] = 0
+                carve(nx, ny)
+
+    carve(1, 1)  # On commence à creuser à partir de (1, 1)
+    maze[0, 1] = 0  # Entrée du labyrinthe
+    maze[maze_size - 1, maze_size - 2] = 0  # Sortie du labyrinthe
+    maze[maze_size - 1, maze_size - 1] = 2  # Marquer la sortie
 
 # Fonction de visualisation
 def draw_maze():
@@ -46,6 +68,7 @@ root.title("Labyrinthe Dynamique avec Q-Learning")
 canvas = tk.Canvas(root, width=maze_width, height=maze_height)
 canvas.pack()
 
+generate_perfect_maze()  # Crée le labyrinthe parfait
 draw_maze()  # Dessine le labyrinthe
 
 # Lancer l'application
