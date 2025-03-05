@@ -59,6 +59,11 @@ def get_reward(x, y):
         return -1
     return 0  # Si on est encore en jeu
 
+# Fonction pour mettre à jour la Q-table
+def update_Q_table(x, y, action, reward, next_x, next_y):
+    max_q_next = np.max(Q_table[next_x, next_y])  # La meilleure récompense future
+    Q_table[x, y, action] += alpha * (reward + gamma * max_q_next - Q_table[x, y, action])
+
 # Mise à jour de la position de l'agent
 def move_agent(action):
     global agent_pos
