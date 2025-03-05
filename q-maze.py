@@ -104,6 +104,18 @@ def draw_maze():
     agent_x1, agent_y1 = (y + 1) * cell_width - 5, (x + 1) * cell_height - 5
     canvas.create_oval(agent_x0, agent_y0, agent_x1, agent_y1, fill='red', outline='darkred')
 
+# Fonction de mise à jour du jeu
+def update_game():
+    global agent_pos
+    x, y = agent_pos
+    action = choose_action(x, y)
+    move_agent(action)
+    reward = get_reward(agent_pos[0], agent_pos[1])
+    next_x, next_y = agent_pos
+    update_Q_table(x, y, action, reward, next_x, next_y)
+
+    draw_maze()
+
 # Initialisation de l'interface
 root = tk.Tk()
 root.title("Labyrinthe Dynamique avec Q-Learning")
@@ -112,6 +124,7 @@ canvas.pack()
 
 generate_perfect_maze()  # Crée le labyrinthe parfait
 draw_maze()  # Dessine le labyrinthe
+update_game()  # Lance l'update du jeu
 
 # Lancer l'application
 root.mainloop()
