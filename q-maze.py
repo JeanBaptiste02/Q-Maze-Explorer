@@ -11,6 +11,10 @@ maze_size = 10
 maze_width = 500
 maze_height = 500
 
+# Actions possibles : 0 = haut, 1 = droite, 2 = bas, 3 = gauche
+actions = ['Up', 'Right', 'Down', 'Left']
+num_actions = len(actions)
+
 # Labyrinthe initialisé
 maze = np.zeros((maze_size, maze_size))  # 0 = libre
 agent_pos = (0, 0)  # Position de l'agent
