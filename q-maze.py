@@ -15,6 +15,9 @@ maze_height = 500
 actions = ['Up', 'Right', 'Down', 'Left']
 num_actions = len(actions)
 
+# Q-table (état = position (x, y), action = mouvement)
+Q_table = np.zeros((maze_size, maze_size, num_actions))
+
 # Labyrinthe initialisé
 maze = np.zeros((maze_size, maze_size))  # 0 = libre
 agent_pos = (0, 0)  # Position de l'agent
