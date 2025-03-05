@@ -1,5 +1,5 @@
 import tkinter as tk
-import numpy as np
+import numpy as np # type: ignore
 import random
 
 # Paramètres du Q-Learning
