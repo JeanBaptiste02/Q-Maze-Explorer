@@ -51,6 +51,14 @@ def choose_action(x, y):
     else:
         return np.argmax(Q_table[x, y])  # Exploitation (meilleure action apprise)
 
+# Fonction pour obtenir la récompense
+def get_reward(x, y):
+    if (x, y) == (maze_size - 1, maze_size - 1):  # Arrivé à la sortie
+        return 1
+    elif maze[x, y] == 1:  # Si on tombe sur un obstacle
+        return -1
+    return 0  # Si on est encore en jeu
+
 # Mise à jour de la position de l'agent
 def move_agent(action):
     global agent_pos
