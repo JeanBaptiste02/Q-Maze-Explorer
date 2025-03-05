@@ -1,6 +1,7 @@
 import tkinter as tk
 
 # Dimensions du labyrinthe
+maze_size = 10
 maze_width = 500
 maze_height = 500
 
