@@ -51,6 +51,23 @@ def choose_action(x, y):
     else:
         return np.argmax(Q_table[x, y])  # Exploitation (meilleure action apprise)
 
+# Mise à jour de la position de l'agent
+def move_agent(action):
+    global agent_pos
+    x, y = agent_pos
+    if action == 0:  # Haut
+        if x > 0 and maze[x - 1, y] != 1:
+            agent_pos = (x - 1, y)
+    elif action == 1:  # Droite
+        if y < maze_size - 1 and maze[x, y + 1] != 1:
+            agent_pos = (x, y + 1)
+    elif action == 2:  # Bas
+        if x < maze_size - 1 and maze[x + 1, y] != 1:
+            agent_pos = (x + 1, y)
+    elif action == 3:  # Gauche
+        if y > 0 and maze[x, y - 1] != 1:
+            agent_pos = (x, y - 1)
+
 # Fonction de visualisation
 def draw_maze():
     canvas.delete('all')
