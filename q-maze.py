@@ -1,6 +1,11 @@
 import tkinter as tk
 import numpy as np
 
+# Paramètres du Q-Learning
+alpha = 0.1  # Taux d'apprentissage
+gamma = 0.9  # Importance des récompenses futures
+epsilon = 0.2  # Probabilité d'exploration
+
 # Dimensions du labyrinthe
 maze_size = 10
 maze_width = 500
