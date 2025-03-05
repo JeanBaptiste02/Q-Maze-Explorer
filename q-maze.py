@@ -44,6 +44,13 @@ def generate_perfect_maze():
     maze[maze_size - 1, maze_size - 2] = 0  # Sortie du labyrinthe
     maze[maze_size - 1, maze_size - 1] = 2  # Marquer la sortie
 
+# Fonction pour choisir l'action selon l'epsilon-greedy
+def choose_action(x, y):
+    if random.uniform(0, 1) < epsilon:
+        return random.randint(0, num_actions - 1)  # Exploration (action aléatoire)
+    else:
+        return np.argmax(Q_table[x, y])  # Exploitation (meilleure action apprise)
+
 # Fonction de visualisation
 def draw_maze():
     canvas.delete('all')
