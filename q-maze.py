@@ -20,7 +20,7 @@ num_actions = len(actions)
 Q_table = np.zeros((maze_size, maze_size, num_actions))
 
 # Labyrinthe initialisé
-maze = np.zeros((maze_size, maze_size))  # 0 = libre
+maze = np.zeros((maze_size, maze_size))  # 0 = libre, 1 = obstacle
 agent_pos = (0, 0)  # Position de l'agent
 
 # Fonction pour générer un labyrinthe parfait
@@ -51,7 +51,7 @@ def choose_action(x, y):
     else:
         return np.argmax(Q_table[x, y])  # Exploitation (meilleure action apprise)
 
-# Fonction pour obtenir la récompense
+# Fonction pour obtenir la récompense (1 pour gagner, -1 pour perdre, 0 pour continuer)
 def get_reward(x, y):
     if (x, y) == (maze_size - 1, maze_size - 1):  # Arrivé à la sortie
         return 1
@@ -87,6 +87,7 @@ def draw_maze():
     cell_width = maze_width // maze_size
     cell_height = maze_height // maze_size
     
+    # Dessiner les murs et la sortie
     for i in range(maze_size):
         for j in range(maze_size):
             x0, y0 = j * cell_width, i * cell_height
@@ -116,9 +117,14 @@ def update_game():
 
     draw_maze()
 
+    # Affichage des récompenses
+    reward_label.config(text=f"Récompense : {reward}")
+
     # Continuer tant que le jeu n'est pas fini
     if reward != 1:
         root.after(100, update_game)  # Met à jour toutes les 100ms
+    else:
+        result_label.config(text="Gagné !")
 
 # Initialisation de l'interface
 root = tk.Tk()
@@ -126,6 +132,13 @@ root.title("Labyrinthe Dynamique avec Q-Learning")
 canvas = tk.Canvas(root, width=maze_width, height=maze_height)
 canvas.pack()
 
+# Labels pour afficher les résultats
+reward_label = tk.Label(root, text="Récompense : 0", font=("Arial", 14))
+reward_label.pack()
+result_label = tk.Label(root, text="", font=("Arial", 14))
+result_label.pack()
+
+# Initialisation du jeu
 generate_perfect_maze()  # Crée le labyrinthe parfait
 draw_maze()  # Dessine le labyrinthe
 update_game()  # Lance l'update du jeu
