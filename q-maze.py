@@ -8,6 +8,7 @@ maze_height = 500
 
 # Labyrinthe initialisé
 maze = np.zeros((maze_size, maze_size))  # 0 = libre
+agent_pos = (0, 0)  # Position de l'agent
 
 # Fonction de visualisation
 def draw_maze():
@@ -20,6 +21,12 @@ def draw_maze():
             x0, y0 = j * cell_width, i * cell_height
             x1, y1 = (j + 1) * cell_width, (i + 1) * cell_height
             canvas.create_rectangle(x0, y0, x1, y1, fill='white', outline='lightgray')
+    
+    # Dessiner l'agent
+    x, y = agent_pos
+    agent_x0, agent_y0 = y * cell_width + 5, x * cell_height + 5
+    agent_x1, agent_y1 = (y + 1) * cell_width - 5, (x + 1) * cell_height - 5
+    canvas.create_oval(agent_x0, agent_y0, agent_x1, agent_y1, fill='red', outline='darkred')
 
 # Initialisation de l'interface
 root = tk.Tk()
