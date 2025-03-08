@@ -21,7 +21,7 @@ This program implements a dynamic maze-solving algorithm using Q-Learning, a typ
 1. Install Python 3.x if not already installed.
 2. Install the required libraries:
    ```
-   pip install numpy tkinter
+   pip install -r requirements.txt
    ```
 
 ## Running the Program
