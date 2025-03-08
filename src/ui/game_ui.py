@@ -1,8 +1,8 @@
 import tkinter as tk
-from maze_renderer import draw_maze
-from maze_generator import generate_perfect_maze
-from agent import choose_action, move_agent
-from q_learning import update_Q_table
+from maze.maze_renderer import draw_maze
+from maze.maze_generator import generate_perfect_maze
+from algorithms.agent import choose_action, move_agent
+from algorithms.q_learning import update_Q_table
 import numpy as np # type: ignore
 
 def start_game():
